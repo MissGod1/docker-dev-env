@@ -8,6 +8,7 @@ build)
     cpu|gpu)
         # uid=$(id -u)
         # name=$(whoami)
+        chmod 777 entrypoint.sh
         read -p 'Please set root & jupyter password:' password
         docker-compose build --build-arg VERSION=$2 \
         --build-arg NAME=$(whoami) \

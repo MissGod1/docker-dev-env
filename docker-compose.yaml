@@ -7,5 +7,5 @@ services:
     ports: 
       - '2222:22'
     volumes:
-      - ./code:/code
+      - ./code:/workspace
     runtime: "nvidia"

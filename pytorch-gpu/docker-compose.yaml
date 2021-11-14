@@ -1,11 +1,10 @@
-version: '3.9'
 services: 
-  dev:
+  pytorch-gpu:
     build:
       context: .
       dockerfile: Dockerfile
     ports: 
-      - '2222:22'
-    volumes:
-      - ./code:/workspace
+      - '22'
+    # volumes:
+    #   - ./code:/workspace
     runtime: "nvidia"

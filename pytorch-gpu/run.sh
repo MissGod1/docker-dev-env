@@ -10,16 +10,7 @@ build)
     --build-arg PASSWORD=$password \
     --build-arg UID=$(id -u)
     ;;
-start)
-    if [ ! -d "code/" ];then
-        mkdir code
-    fi
-    docker-compose up
-    ;;
-remove)
-    docker-compose down
-    ;;
 *)
-    echo "$0 [build|start|remove]"
+    docker-compose $1 $2
     ;;
 esac

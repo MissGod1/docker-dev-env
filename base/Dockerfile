@@ -1,4 +1,5 @@
 FROM pytorch/pytorch:1.9.0-cuda11.1-cudnn8-runtime
+COPY entrypoint.sh /entrypoint.sh
 
 # Add aliyun apt-get
 RUN echo "deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse" > /etc/apt/sources.list \
@@ -16,14 +17,11 @@ RUN echo "deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe 
     && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config \
     && sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/g' /etc/ssh/sshd_config \
     && mkdir -p /run/sshd \
-    && pip3 install --upgrade pip -i http://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com \
-    && pip3 config set global.index-url http://mirrors.aliyun.com/pypi/simple/ \
-    && pip3 config set install.trusted-host mirrors.aliyun.com \
-    && pip3 install transformers tqdm wandb datasets \
-    && rm -rf /usr/bin/python3 /usr/bin/python3-config \
-    && ln -s /opt/conda/bin/python3 /usr/bin/python3 \
-    && ln -s /opt/conda/bin/python3-config /usr/bin/python3-config \
     && apt-get clean \
-    && rm -rf ~/.cache/pip
+    && echo "export PATH=\$PATH:/opt/conda/bin" >> /etc/profile
 
-ENTRYPOINT ["/bin/bash"]
+EXPOSE 22
+
+WORKDIR /workspace
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

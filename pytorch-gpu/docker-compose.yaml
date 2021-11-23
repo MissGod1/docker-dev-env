@@ -1,8 +1,9 @@
 services: 
   pytorch-gpu:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: "missgod1/pytorch:1.9.0-cuda11.1-cudnn8-runtime"
+    environment:
+      - USERNAME=
+      - PASSWORD=
     ports: 
       - '22'
     # volumes:

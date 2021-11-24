@@ -1,5 +1,4 @@
 FROM pytorch/pytorch:1.9.0-cuda11.1-cudnn8-runtime
-COPY entrypoint.sh /entrypoint.sh
 
 # Add aliyun apt-get
 RUN echo "deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe multiverse" > /etc/apt/sources.list \
@@ -23,5 +22,7 @@ RUN echo "deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe 
 EXPOSE 22
 
 WORKDIR /workspace
+
+COPY entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]

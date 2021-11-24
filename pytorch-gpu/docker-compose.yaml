@@ -1,11 +1,14 @@
 services: 
   pytorch-gpu:
+    container_name: ${USER}-pytorch
     image: "missgod1/pytorch:1.9.0-cuda11.1-cudnn8-runtime"
+    shm_size: '8gb'
     environment:
-      - USERNAME=
-      - PASSWORD=
+      - UID=1000
+      - USERNAME=${USER}
+      - PASSWORD=123456
     ports: 
       - '22'
     # volumes:
     #   - ./code:/workspace
-    runtime: "nvidia"
+    # runtime: "nvidia"

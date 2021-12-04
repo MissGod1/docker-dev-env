@@ -1,6 +1,6 @@
 services: 
   tensorflow:
-    image: "missgod1/tensorflow:1.12.0-gpu-py3"
+    image: "missgod1/tensorflow:1.15.0-gpu-py3"
     shm_size: '8gb'
     ports: 
       - '22'

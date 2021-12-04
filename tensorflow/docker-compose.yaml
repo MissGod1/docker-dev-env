@@ -1,0 +1,9 @@
+services: 
+  tensorflow:
+    image: "missgod1/tensorflow:1.12.0-gpu-py3"
+    shm_size: '8gb'
+    ports: 
+      - '22'
+    # volumes:
+    #   - ./code:/workspace
+    # runtime: "nvidia"

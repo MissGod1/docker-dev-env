@@ -12,7 +12,7 @@ RUN echo "deb http://mirrors.aliyun.com/ubuntu/ bionic main restricted universe 
     && echo "deb http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list \
     && echo "deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted universe multiverse" >> /etc/apt/sources.list \
     && apt-get update && apt-get remove -y openssh-server --purge && apt-get install -y openssh-server wget git sudo \
-    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/g' /etc/ssh/sshd_config \
+    && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/g' /etc/ssh/sshd_config \
     && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/g' /etc/ssh/sshd_config \
     && sed -i 's/#PermitEmptyPasswords no/PermitEmptyPasswords no/g' /etc/ssh/sshd_config \
     && mkdir -p /run/sshd \
@@ -23,6 +23,4 @@ EXPOSE 22
 
 WORKDIR /workspace
 
-COPY entrypoint.sh /entrypoint.sh
-
-ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
+ENTRYPOINT ["/usr/sbin/sshd", "-D"]
